@@ -136,6 +136,8 @@ celerybeat.pid
 *.aof
 *.pid
 
+CLAUDE.md
+.claude
 # RabbitMQ
 mnesia/
 rabbitmq/
