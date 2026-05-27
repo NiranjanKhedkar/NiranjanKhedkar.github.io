@@ -772,7 +772,8 @@ strong { font-weight: 700; }
   transition: background 0.18s, color 0.18s;
 }
 
-.tag-cloud span:hover {
+.tag-cloud span:hover,
+.tag-cloud span:active {
   background: var(--accent);
   color: #ffffff;
 }
