@@ -1,3 +1,98 @@
+// ── GLOBE LOADER ──────────────────────────────────────────────
+(function () {
+  const canvas = document.getElementById('globeCanvas');
+  const ctx    = canvas.getContext('2d');
+
+  const SIZE = 200, DPR = 2;
+  ctx.scale(DPR, DPR);
+  const CX = SIZE / 2, CY = SIZE / 2, R = 64;
+
+  const projection = d3.geoOrthographic()
+    .scale(R).translate([CX, CY]).clipAngle(90);
+  const path       = d3.geoPath(projection, ctx);
+  const graticule  = d3.geoGraticule10();
+
+  let land = null, countries = null, animId = null;
+
+  const particles = Array.from({ length: 70 }, () => {
+    const rad = R + 6 + Math.random() * 24;
+    return {
+      a: Math.random() * Math.PI * 2, r: rad,
+      speed: (0.012 + (R + 30 - rad) / 2600) * (0.8 + Math.random() * 0.4),
+      len: 0.12 + Math.random() * 0.5,
+      alpha: 0.06 + Math.random() * 0.22,
+      wob: Math.random() * Math.PI * 2
+    };
+  });
+
+  function drawWhirl(t) {
+    ctx.lineCap = 'round';
+    for (const p of particles) {
+      p.a += p.speed;
+      const r = p.r + Math.sin(t * 0.0011 + p.wob) * 3;
+      ctx.beginPath();
+      ctx.arc(CX, CY, r, p.a, p.a + p.len);
+      ctx.strokeStyle = `rgba(26,26,26,${p.alpha})`;
+      ctx.lineWidth = 1.1;
+      ctx.stroke();
+    }
+  }
+
+  let rotation = 0;
+  function render() {
+    const t = performance.now();
+    ctx.clearRect(0, 0, SIZE, SIZE);
+    rotation += 0.32;
+    projection.rotate([rotation, -18, 0]);
+    drawWhirl(t);
+    ctx.beginPath(); path({ type: 'Sphere' });
+    ctx.strokeStyle = 'rgba(26,26,26,0.55)'; ctx.lineWidth = 1; ctx.stroke();
+    if (land) {
+      ctx.beginPath(); path(graticule);
+      ctx.strokeStyle = 'rgba(26,26,26,0.10)'; ctx.lineWidth = 0.5; ctx.stroke();
+      ctx.beginPath(); path(land);
+      ctx.fillStyle = 'rgba(26,26,26,0.14)'; ctx.fill();
+      ctx.beginPath(); path(countries);
+      ctx.strokeStyle = '#1a1a1a'; ctx.lineWidth = 0.6; ctx.stroke();
+    }
+    animId = requestAnimationFrame(render);
+  }
+
+  function hideLoader() {
+    const loader = document.getElementById('pageLoader');
+    if (!loader) return;
+    loader.classList.add('fade-out');
+    setTimeout(() => {
+      loader.style.display = 'none';
+      if (animId) cancelAnimationFrame(animId);
+    }, 560);
+  }
+
+  const startTime = performance.now();
+  function scheduleHide() {
+    const elapsed = performance.now() - startTime;
+    setTimeout(hideLoader, Math.max(0, 900 - elapsed));
+  }
+
+  fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+    .then(r => r.json())
+    .then(world => {
+      countries = topojson.feature(world, world.objects.countries);
+      land = topojson.merge(world, world.objects.countries.geometries);
+      render();
+    })
+    .catch(() => render());
+
+  if (document.readyState === 'complete') {
+    scheduleHide();
+  } else {
+    window.addEventListener('load', scheduleHide);
+  }
+
+  // Hard cap — never block for more than 4s
+  setTimeout(hideLoader, 4000);
+})();
+
 // ── THEME TOGGLE ──────────────────────────────────────────────
 const html = document.documentElement;
 const themeBtn = document.getElementById('themeBtn');

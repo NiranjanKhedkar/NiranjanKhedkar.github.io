@@ -30,6 +30,31 @@
 }
 
 /* ============================================================
+   PAGE LOADER
+   ============================================================ */
+#pageLoader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.55s ease;
+}
+
+#pageLoader.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#pageLoader canvas {
+  width: 200px;
+  height: 200px;
+  display: block;
+}
+
+/* ============================================================
    RESET & BASE
    ============================================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }

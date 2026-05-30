@@ -15,6 +15,11 @@
 </head>
 <body>
 
+  <!-- ===== PAGE LOADER ===== -->
+  <div id="pageLoader" role="status" aria-label="Loading">
+    <canvas id="globeCanvas" width="400" height="400"></canvas>
+  </div>
+
   <!-- ===== NAV ===== -->
   <nav class="navbar" id="navbar">
     <div class="nav-inner">
@@ -724,6 +729,8 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="script.js"></script>
 </body>
