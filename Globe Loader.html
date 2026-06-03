@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Globe Loader</title>
+<style>
+  html, body {
+    margin: 0;
+    height: 100%;
+  }
+  body {
+    background: #f1efe9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* the loader — a self-contained 200x200 block */
+  .globe-loader {
+    width: 200px;
+    height: 200px;
+    display: block;
+  }
+  .globe-loader canvas {
+    width: 200px;
+    height: 200px;
+    display: block;
+  }
+</style>
+</head>
+<body>
+  <div class="globe-loader" role="status" aria-label="Loading">
+    <canvas id="globe" width="400" height="400"></canvas>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+  <script>
+  (function () {
+    const canvas = document.getElementById('globe');
+    const ctx = canvas.getContext('2d');
+
+    // Logical drawing size (CSS px). Canvas backing store is 2x for crispness.
+    const SIZE = 200;
+    const DPR = 2;
+    ctx.scale(DPR, DPR);
+
+    const CX = SIZE / 2;
+    const CY = SIZE / 2;
+    const R = 64;                 // globe radius
+    const INK = '#1a1a1a';        // monochrome ink
+    const BG = '#f1efe9';
+
+    const projection = d3.geoOrthographic()
+      .scale(R)
+      .translate([CX, CY])
+      .clipAngle(90);
+
+    const path = d3.geoPath(projection, ctx);
+    const graticule = d3.geoGraticule10();
+
+    let land = null;       // merged country outlines
+    let countries = null;  // individual countries
+
+    // ---- whirl particles ----
+    const N = 70;
+    const particles = [];
+    for (let i = 0; i < N; i++) {
+      const rad = R + 6 + Math.random() * 24;       // ring radius band
+      particles.push({
+        a: Math.random() * Math.PI * 2,             // angle
+        r: rad,
+        // inner particles whirl faster -> vortex feel
+        speed: (0.012 + (R + 30 - rad) / 2600) * (0.8 + Math.random() * 0.4),
+        len: 0.12 + Math.random() * 0.5,            // arc length (radians)
+        alpha: 0.06 + Math.random() * 0.22,
+        wob: Math.random() * Math.PI * 2            // radius wobble phase
+      });
+    }
+
+    function drawWhirl(t) {
+      ctx.lineCap = 'round';
+      for (const p of particles) {
+        p.a += p.speed;
+        const r = p.r + Math.sin(t * 0.0011 + p.wob) * 3;
+        ctx.beginPath();
+        ctx.arc(CX, CY, r, p.a, p.a + p.len);
+        ctx.strokeStyle = `rgba(26,26,26,${p.alpha})`;
+        ctx.lineWidth = 1.1;
+        ctx.stroke();
+      }
+    }
+
+    let rotation = 0;
+    function render() {
+      const t = performance.now();
+      ctx.clearRect(0, 0, SIZE, SIZE);
+
+      // spin
+      rotation += 0.32;
+      projection.rotate([rotation, -18, 0]);
+
+      // whirl behind + around
+      drawWhirl(t);
+
+      // sphere edge
+      ctx.beginPath();
+      path({ type: 'Sphere' });
+      ctx.strokeStyle = 'rgba(26,26,26,0.55)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      if (land) {
+        // graticule (faint)
+        ctx.beginPath();
+        path(graticule);
+        ctx.strokeStyle = 'rgba(26,26,26,0.10)';
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+
+        // country fills (subtle) + outlines
+        ctx.beginPath();
+        path(land);
+        ctx.fillStyle = 'rgba(26,26,26,0.14)';
+        ctx.fill();
+
+        ctx.beginPath();
+        path(countries);
+        ctx.strokeStyle = INK;
+        ctx.lineWidth = 0.6;
+        ctx.stroke();
+      }
+
+      requestAnimationFrame(render);
+    }
+
+    fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+      .then(r => r.json())
+      .then(world => {
+        countries = topojson.feature(world, world.objects.countries);
+        land = topojson.merge(world, world.objects.countries.geometries);
+        render();
+      })
+      .catch(() => {
+        // still spin the whirl + graticule even if data fails
+        render();
+      });
+  })();
+  </script>
+</body>
+</html>

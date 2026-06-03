@@ -166,6 +166,8 @@ async function loadBlogPosts() {
     grid.querySelectorAll('.blog-card').forEach(card => {
       const meta = posts.find(p => p.slug === card.dataset.slug);
       card.addEventListener('click', () => openPost(card.dataset.slug, meta));
+      card.classList.add('reveal');
+      revealObserver.observe(card);
     });
   } catch {
     grid.innerHTML = '<p class="blog-empty">Blog requires a local server to load posts. Run: <code>python -m http.server 8080</code></p>';
@@ -203,3 +205,51 @@ document.addEventListener('keydown', e => {
 });
 
 loadBlogPosts();
+
+// ── IMPACT COUNTERS ───────────────────────────────────────────
+function animateCounter(el) {
+  const target   = parseInt(el.dataset.count, 10);
+  const prefix   = el.dataset.prefix || '';
+  const suffix   = el.dataset.suffix || '';
+  const duration = 1200;
+  const start    = performance.now();
+
+  (function tick(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const eased    = 1 - Math.pow(1 - progress, 3);
+    el.textContent = prefix + Math.floor(eased * target) + suffix;
+    if (progress < 1) requestAnimationFrame(tick);
+  })(start);
+}
+
+const counterObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    animateCounter(entry.target);
+    counterObserver.unobserve(entry.target);
+  });
+}, { threshold: 0.6 });
+
+document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+
+// ── SCROLL REVEAL ─────────────────────────────────────────────
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add('visible');
+    revealObserver.unobserve(entry.target);
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll(
+  '.timeline-item, .project-card, .skill-group, .impact-card, ' +
+  '.testi-card, .recog-card, .edu-card, ' +
+  '#about .section-heading, #experience .section-heading, ' +
+  '#skills .section-heading, #projects .section-heading, ' +
+  '#recognition .section-heading, #education .section-heading, ' +
+  '#blog .section-heading, #testimonials .section-heading, ' +
+  '#impact .section-heading, #contact .section-heading'
+).forEach(el => {
+  el.classList.add('reveal');
+  revealObserver.observe(el);
+});
