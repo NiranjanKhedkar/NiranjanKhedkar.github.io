@@ -243,7 +243,7 @@ const revealObserver = new IntersectionObserver(entries => {
 
 document.querySelectorAll(
   '.timeline-item, .project-card, .skill-group, .impact-card, ' +
-  '.testi-card, .recog-card, .edu-card, ' +
+  '.recog-card, .edu-card, ' +
   '#about .section-heading, #experience .section-heading, ' +
   '#skills .section-heading, #projects .section-heading, ' +
   '#recognition .section-heading, #education .section-heading, ' +
@@ -253,3 +253,82 @@ document.querySelectorAll(
   el.classList.add('reveal');
   revealObserver.observe(el);
 });
+
+// ── READING PROGRESS BAR ──────────────────────────────────────
+const progressBar = document.getElementById('progressBar');
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY;
+  const total    = document.body.scrollHeight - window.innerHeight;
+  progressBar.style.transform = `scaleX(${total > 0 ? scrolled / total : 0})`;
+}, { passive: true });
+
+// ── BACK TO TOP ───────────────────────────────────────────────
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+  backToTop.classList.toggle('visible', window.scrollY > 400);
+}, { passive: true });
+backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// ── CURSOR SPOTLIGHT ──────────────────────────────────────────
+const spotlight = document.getElementById('cursorSpotlight');
+document.addEventListener('mousemove', e => {
+  spotlight.style.opacity = '1';
+  spotlight.style.transform = `translate(${e.clientX - 260}px, ${e.clientY - 260}px)`;
+}, { passive: true });
+
+// ── COPY BUTTONS ──────────────────────────────────────────────
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const text = btn.closest('[data-copy]').dataset.copy;
+    navigator.clipboard.writeText(text).then(() => {
+      const tip = btn.querySelector('.copy-tooltip');
+      tip.classList.add('show');
+      setTimeout(() => tip.classList.remove('show'), 1800);
+    });
+  });
+});
+
+// ── TESTIMONIAL CAROUSEL ──────────────────────────────────────
+(function () {
+  const track   = document.getElementById('testiTrack');
+  const dotsEl  = document.getElementById('testiDots');
+  const cards   = [...track.querySelectorAll('.testi-card')];
+  let current   = 0;
+  let timer;
+
+  function perPage() { return window.innerWidth > 780 ? 2 : 1; }
+  function pages()   { return Math.ceil(cards.length / perPage()); }
+
+  function buildDots() {
+    dotsEl.innerHTML = '';
+    for (let i = 0; i < pages(); i++) {
+      const d = document.createElement('button');
+      d.className = 'testi-dot' + (i === 0 ? ' active' : '');
+      d.setAttribute('aria-label', `Go to slide ${i + 1}`);
+      d.addEventListener('click', () => { stopAuto(); goTo(i); startAuto(); });
+      dotsEl.appendChild(d);
+    }
+  }
+
+  function goTo(page) {
+    const p = ((page % pages()) + pages()) % pages();
+    current = p;
+    const targetCard = cards[p * perPage()];
+    if (targetCard) track.style.transform = `translateX(-${targetCard.offsetLeft}px)`;
+    dotsEl.querySelectorAll('.testi-dot').forEach((d, i) => d.classList.toggle('active', i === p));
+  }
+
+  function startAuto() { timer = setInterval(() => goTo(current + 1), 5000); }
+  function stopAuto()  { clearInterval(timer); }
+
+  document.getElementById('testiPrev').addEventListener('click', () => { stopAuto(); goTo(current - 1); startAuto(); });
+  document.getElementById('testiNext').addEventListener('click', () => { stopAuto(); goTo(current + 1); startAuto(); });
+
+  track.addEventListener('mouseenter', stopAuto);
+  track.addEventListener('mouseleave', startAuto);
+
+  window.addEventListener('resize', () => { buildDots(); goTo(0); });
+
+  buildDots();
+  startAuto();
+})();
