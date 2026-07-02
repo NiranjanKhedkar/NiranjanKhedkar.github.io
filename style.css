@@ -108,13 +108,15 @@ strong { font-weight: 700; }
 }
 
 .nav-logo {
-  font-family: 'Lora', serif;
-  font-style: italic;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--accent);
-  letter-spacing: -0.02em;
   margin-right: auto;
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo img {
+  display: block;
+  height: 36px;
+  width: auto;
 }
 
 .nav-links {
