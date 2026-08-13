@@ -77,8 +77,8 @@
         <p class="hero-tagline">Gen-AI engineer. shipping LLMs to production. always building.</p>
         <p class="hero-bio">
           Three years building AI systems that Fortune 500 companies stake real operations on —
-          RAG pipelines, multi-agent workflows, fine-tuned LLMs. 18+ enterprise deployments
-          across Japan, Europe, the Middle East, and the US.
+          RAG pipelines, multi-agent workflows, fine-tuned LLMs, GPU inference optimisation.
+          18+ enterprise deployments across Japan, Europe, the Middle East, and the US.
         </p>
         <div class="hero-ctas">
           <a href="#projects" class="btn btn-primary">View Work</a>
@@ -155,6 +155,11 @@
           <p>
             Gen-AI Engineer at IBM, building AI systems that Fortune 500 companies run real
             operations on — not demos, not pilots. Production.
+          </p>
+          <p>
+            Hands-on across the full lifecycle: LLM fine-tuning, RAG and agentic pipelines,
+            GPU inference optimisation, containerised deployment on Kubernetes and OpenShift,
+            and multi-cloud production operations.
           </p>
           <p>
             Three years working across Japan, Europe, the Middle East, and the US has taught me
@@ -242,7 +247,7 @@
             <span class="tl-org">IBM &nbsp;·&nbsp; Bengaluru</span>
           </div>
           <div class="timeline-body">
-            <h3>AI Delivery Consultant, Expert Labs</h3>
+            <h3>AI Delivery Consultant &nbsp;<span class="tag-inline">Applied AI</span></h3>
             <ul>
               <li>Architect and operate production AI/ML workloads on OpenShift and Kubernetes, owning orchestration, autoscaling, and resource optimisation for containerised inference services</li>
               <li>Operate enterprise AI systems for Fortune 500 clients including UPS, Adobe, and AT&T, maintaining 99.9%+ uptime for mission-critical automation workloads</li>
@@ -258,13 +263,15 @@
             <span class="tl-org">IBM &nbsp;·&nbsp; Bengaluru</span>
           </div>
           <div class="timeline-body">
-            <h3>AI Engineer</h3>
+            <h3>AI Engineer &nbsp;<span class="tag-inline">Forward Deployed Engineer</span></h3>
             <ul>
               <li>Architected and deployed 15+ production GenAI systems worth $15M+ in revenue for Japanese enterprise clients — Toyota, Honda, and financial institutions — using enterprise LLMs with RAG pipelines and autonomous agents</li>
-              <li>Reduced manual workflows by 40% by orchestrating multi-agent systems with CrewAI and LangGraph that automated research, code generation, and business processes at enterprise scale</li>
+              <li>Fine-tuned IBM Granite and Llama models on domain-specific datasets of 100K+ documents, improving response accuracy and contextual relevance by 20–30% in production</li>
+              <li>Cut manual research and coding time by up to 60% by orchestrating multi-agent systems with CrewAI and LangGraph — chaining retrieval, summarisation, reasoning, and tool invocation across APIs, databases, and enterprise knowledge bases</li>
+              <li>Delivered AI-driven code generation and conversion pipelines for a leading global automotive manufacturer and a major consumer-electronics company, accelerating software migration and boosting developer productivity by 40%</li>
               <li>Built hybrid-cloud AI infrastructure with Docker and OpenShift, standardising containerised deployment of LLM inference and RAG services across client environments</li>
-              <li>Delivered end-to-end MLOps pipelines covering data ingestion, fine-tuning, evaluation, deployment, and monitoring</li>
-              <li>Built computer vision and multi-modal AI solutions, including image-to-text generation pipelines and YOLO-based symbol detection for nuclear plant engineering diagrams</li>
+              <li>Delivered end-to-end MLOps pipelines covering data ingestion, fine-tuning, evaluation, deployment, and monitoring — with rigorous LLM evaluation (perplexity, BLEU, ROUGE, human-in-the-loop) and automated feedback loops</li>
+              <li>Built computer vision and multi-modal AI solutions, including image-to-text generation pipelines and YOLO-based symbol detection and classification for nuclear plant engineering diagrams</li>
             </ul>
           </div>
         </div>
@@ -277,8 +284,9 @@
           <div class="timeline-body">
             <h3>AI Engineer &nbsp;<span class="tag-inline">Freelance</span></h3>
             <ul>
-              <li>Designed and deployed a finance-sector chatbot — reduced customer response time by 40%</li>
+              <li>Designed and deployed a customer-facing chatbot for a finance company — reduced customer response time by 40%</li>
               <li>Improved sentiment analysis model accuracy by 18% through targeted fine-tuning</li>
+              <li>Full stack across Python, NLP, and conversational AI — from data pipeline to deployed chatbot</li>
             </ul>
           </div>
         </div>
@@ -316,7 +324,8 @@
             <span>LLM Fine-tuning</span><span>LoRA</span><span>SFT</span><span>MCP</span>
             <span>vLLM</span><span>LlamaIndex</span><span>Hugging Face</span>
             <span>Milvus</span><span>ChromaDB</span><span>FAISS</span>
-            <span>RAGAS</span><span>BLEU</span><span>COMET</span><span>BLEURT</span>
+            <span>RAGAS</span><span>BLEU</span><span>ROUGE</span><span>COMET</span>
+            <span>BLEURT</span><span>Perplexity</span><span>Human-in-the-Loop Eval</span>
           </div>
         </div>
 
@@ -337,6 +346,7 @@
             <span>Helm</span><span>ArgoCD</span><span>CI/CD</span>
             <span>AWS</span><span>GCP</span><span>Azure</span>
             <span>IBM Cloud</span><span>Terraform</span><span>Hybrid-Cloud</span>
+            <span>Monitoring</span><span>Inference Optimization</span><span>Autoscaling</span>
           </div>
         </div>
 
@@ -352,7 +362,7 @@
         <div class="skill-group">
           <h4>AI Infrastructure</h4>
           <div class="tag-cloud">
-            <span>Model Serving</span>
+            <span>Model Serving</span><span>GPU Inference</span><span>Continuous Batching</span>
             <span>LlamaIndex</span><span>Pinecone</span><span>FAISS</span><span>Weaviate</span>
           </div>
         </div>
@@ -379,6 +389,14 @@
           </div>
         </div>
 
+        <div class="skill-group skill-group--full">
+          <h4>Spoken Languages</h4>
+          <div class="tag-cloud lang-cloud">
+            <span class="lang-tag">English — Native</span>
+            <span class="lang-tag">Japanese — JLPT N4, working proficiency with clients</span>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -392,15 +410,17 @@
 
         <div class="project-card project-card--full">
           <div class="project-top">
-            <h3>AI Translation Platform — IBM ESA Partner Engagement</h3>
+            <h3>Neural Machine Translation Platform — IBM ESA Partner Engagement</h3>
             <span class="project-year">May – Nov 2025</span>
           </div>
           <p>
             Primary technical resource on a watsonx.ai engagement for a New Zealand-based ESA partner building a
             proprietary neural translation platform. Deployed their models on IBM Cloud GPU infrastructure
-            (NVIDIA A100 80GB ×2) via <strong>BYOM vLLM runtime</strong>, migrating the full stack from AWS.
-            Designed a proxy server architecture that dispatched batch translation requests in parallel across
-            two model instances — achieving <strong>6.2× inference acceleration</strong> (2712s → 280s for 2000 segments).
+            (NVIDIA A100 80GB ×2) via a <strong>BYOM vLLM runtime with continuous batching</strong>,
+            migrating the full serving stack from AWS.
+            Designed an <strong>asynchronous proxy layer</strong> that load-balanced and dispatched batch translation
+            requests in parallel across two vLLM model replicas — achieving <strong>6.2× inference throughput</strong>
+            (2712s → 280s for 2000 segments).
             Structured an end-to-end fine-tuning pipeline covering data prep, base model selection
             (Gemma 2 9B / Gemma 3 12B/27B), LoRA + SFT continual pre-training, and multi-metric evaluation
             (BLEU, COMET, BLEURT, METRICX 24 XL). Coordinated delivery across IBM Japan, IBM India, and the
@@ -474,10 +494,11 @@
           </div>
           <p>
             CNN-based plant classification system with real-time image capture and inference.
-            Achieved <strong>94% accuracy</strong> across plant species — B.Tech capstone project.
+            Achieved <strong>94% accuracy</strong> across plant species — B.Tech capstone project,
+            published in <strong>IJSREM</strong> as <em>Determination of Medicinal Leaf Properties</em>.
           </p>
           <div class="tag-cloud">
-            <span>Python</span><span>CNN</span><span>Deep Learning</span><span>Computer Vision</span>
+            <span>Python</span><span>CNN</span><span>Deep Learning</span><span>Computer Vision</span><span>Published Research</span>
           </div>
         </div>
 
@@ -504,8 +525,16 @@
   <section class="section section-alt" id="recognition">
     <div class="container">
       <p class="section-tag">06 — Recognition</p>
-      <h2 class="section-heading">Awards &amp; <em>Certifications</em></h2>
+      <h2 class="section-heading">Awards, <em>Publications</em> &amp; Certifications</h2>
       <div class="recognition-grid">
+
+        <div class="recog-card">
+          <span class="recog-icon cert">✎</span>
+          <div>
+            <h4>Publication — Determination of Medicinal Leaf Properties</h4>
+            <p>IJSREM &nbsp;·&nbsp; CNN-based plant classification research, 94% accuracy</p>
+          </div>
+        </div>
 
         <div class="recog-card">
           <span class="recog-icon award">★</span>
