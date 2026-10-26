@@ -2,30 +2,36 @@
    TOKENS — light (default) and dark overrides
    ============================================================ */
 :root {
-  --bg:            #f5ede0;
-  --bg-alt:        #edddc8;
-  --text:          #333333;
-  --text-muted:    #777777;
-  --accent:        #fa0000;
-  --border:        #e2e2e2;
-  --tag-bg:        #f0f0f0;
-  --tag-text:      #555555;
-  --card-bg:       #f5ede0;
-  --nav-bg:        rgba(245, 237, 224, 0.96);
-  --shadow:        0 2px 12px rgba(0, 0, 0, 0.07);
+  --bg:            #fcfbf8;
+  --bg-alt:        #f3f5ea;
+  --text:          #1f2a28;
+  --text-muted:    #5b6663;
+  --accent:        #1d4b41;
+  --on-accent:     #ffffff;
+  --cta:           #f6d365;
+  --cta-text:      #173a35;
+  --border:        #e3e4dc;
+  --tag-bg:        #eef3e6;
+  --tag-text:      #1d4b41;
+  --card-bg:       #ffffff;
+  --nav-bg:        rgba(252, 251, 248, 0.96);
+  --shadow:        0 2px 12px rgba(23, 58, 53, 0.08);
 }
 
 [data-theme="dark"] {
-  --bg:            #1a1a1a;
-  --bg-alt:        #222222;
-  --text:          #e0e0e0;
-  --text-muted:    #909090;
-  --accent:        #fa0000;
-  --border:        #383838;
-  --tag-bg:        #2a2a2a;
-  --tag-text:      #bbbbbb;
-  --card-bg:       #242424;
-  --nav-bg:        rgba(26, 26, 26, 0.96);
+  --bg:            #0f2421;
+  --bg-alt:        #132d29;
+  --text:          #e6ece8;
+  --text-muted:    #9fb0aa;
+  --accent:        #f2cf63;
+  --on-accent:     #0f2421;
+  --cta:           #f2cf63;
+  --cta-text:      #0f2421;
+  --border:        #24413c;
+  --tag-bg:        #1a3632;
+  --tag-text:      #cfdcd6;
+  --card-bg:       #153029;
+  --nav-bg:        rgba(15, 36, 33, 0.96);
   --shadow:        0 2px 12px rgba(0, 0, 0, 0.35);
 }
 
@@ -61,8 +67,10 @@
 
 html { scroll-behavior: smooth; }
 
+::selection { background: #173a35; color: #ffffff; }
+
 body {
-  font-family: 'Assistant', sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.7;
@@ -210,7 +218,7 @@ strong { font-weight: 700; }
 }
 
 .hero-tagline {
-  font-family: 'Lora', serif;
+  font-family: 'Playfair Display', Georgia, serif;
   font-style: italic;
   font-size: 1.15rem;
   color: var(--accent);
@@ -248,7 +256,7 @@ strong { font-weight: 700; }
 
 /* name */
 .hero-name {
-  font-family: 'Lora', serif;
+  font-family: 'Playfair Display', Georgia, serif;
   font-size: clamp(2.6rem, 6vw, 4.4rem);
   font-weight: 600;
   line-height: 1.1;
@@ -288,7 +296,7 @@ strong { font-weight: 700; }
   display: inline-block;
   padding: 0.55rem 1.35rem;
   border-radius: 6px;
-  font-family: 'Assistant', sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
@@ -297,9 +305,9 @@ strong { font-weight: 700; }
 }
 
 .btn-primary {
-  background: var(--accent);
-  color: #ffffff;
-  border: 1px solid var(--accent);
+  background: var(--cta);
+  color: var(--cta-text);
+  border: 1px solid var(--cta);
 }
 
 .btn-primary:hover { opacity: 0.84; }
@@ -366,7 +374,7 @@ strong { font-weight: 700; }
 }
 
 .wheel-text {
-  font-family: 'Assistant', sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: 13.5px;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -507,7 +515,7 @@ strong { font-weight: 700; }
 }
 
 .impact-big {
-  font-family: 'Lora', serif;
+  font-family: 'Playfair Display', Georgia, serif;
   font-size: clamp(3.2rem, 7vw, 5rem);
   font-weight: 600;
   line-height: 1;
@@ -516,7 +524,7 @@ strong { font-weight: 700; }
 }
 
 .impact-mid {
-  font-family: 'Lora', serif;
+  font-family: 'Playfair Display', Georgia, serif;
   font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.4;
@@ -569,7 +577,7 @@ strong { font-weight: 700; }
 }
 
 .section-heading {
-  font-family: 'Lora', serif;
+  font-family: 'Playfair Display', Georgia, serif;
   font-size: clamp(1.7rem, 4vw, 2.4rem);
   font-weight: 600;
   line-height: 1.2;
@@ -595,7 +603,7 @@ strong { font-weight: 700; }
 .about-left .section-heading { margin-bottom: 0; }
 
 .about-quote {
-  font-family: 'Lora', serif;
+  font-family: 'Playfair Display', Georgia, serif;
   font-style: italic;
   font-size: 1.2rem;
   font-weight: 400;
@@ -646,7 +654,7 @@ strong { font-weight: 700; }
 
 .stat-num {
   display: block;
-  font-family: 'Lora', serif;
+  font-family: 'Playfair Display', Georgia, serif;
   font-size: 1.6rem;
   font-weight: 600;
   color: var(--accent);
@@ -716,7 +724,7 @@ strong { font-weight: 700; }
 }
 
 .timeline-body h3 {
-  font-family: 'Lora', serif;
+  font-family: 'Playfair Display', Georgia, serif;
   font-size: 1.05rem;
   font-weight: 600;
   margin-bottom: 0.8rem;
@@ -727,7 +735,7 @@ strong { font-weight: 700; }
 }
 
 .tag-inline {
-  font-family: 'Assistant', sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -802,7 +810,7 @@ strong { font-weight: 700; }
 .tag-cloud span:hover,
 .tag-cloud span:active {
   background: var(--accent);
-  color: #ffffff;
+  color: var(--on-accent);
 }
 
 /* ============================================================
@@ -836,7 +844,7 @@ strong { font-weight: 700; }
 }
 
 .project-top h3 {
-  font-family: 'Lora', serif;
+  font-family: 'Playfair Display', Georgia, serif;
   font-size: 1.05rem;
   font-weight: 600;
 }
@@ -908,7 +916,7 @@ strong { font-weight: 700; }
 }
 
 .edu-degree {
-  font-family: 'Lora', serif;
+  font-family: 'Playfair Display', Georgia, serif;
   font-size: 1.4rem;
   font-weight: 600;
   line-height: 1.3;
@@ -999,7 +1007,7 @@ strong { font-weight: 700; }
 .testi-card--full { grid-column: 1 / -1; }
 
 .testi-quote {
-  font-family: 'Lora', serif;
+  font-family: 'Playfair Display', Georgia, serif;
   font-size: 3.5rem;
   line-height: 1;
   color: var(--accent);
@@ -1008,7 +1016,7 @@ strong { font-weight: 700; }
 }
 
 .testi-text {
-  font-family: 'Lora', serif;
+  font-family: 'Playfair Display', Georgia, serif;
   font-style: italic;
   font-size: 0.975rem;
   line-height: 1.85;
@@ -1220,7 +1228,7 @@ strong { font-weight: 700; }
   width: 520px;
   height: 520px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(250,0,0,0.05) 0%, transparent 68%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 5%, transparent) 0%, transparent 68%);
   pointer-events: none;
   top: 0;
   left: 0;
@@ -1242,7 +1250,7 @@ strong { font-weight: 700; }
   height: 40px;
   border-radius: 50%;
   background: var(--accent);
-  color: #ffffff;
+  color: var(--on-accent);
   border: none;
   cursor: pointer;
   font-size: 1rem;
@@ -1254,7 +1262,7 @@ strong { font-weight: 700; }
   pointer-events: none;
   transition: opacity 0.25s, transform 0.25s;
   z-index: 250;
-  box-shadow: 0 2px 10px rgba(250,0,0,0.3);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--accent) 30%, transparent);
 }
 
 #backToTop.visible {
@@ -1297,7 +1305,7 @@ strong { font-weight: 700; }
 .copy-btn:hover {
   color: var(--accent);
   border-color: var(--accent);
-  background: rgba(250,0,0,0.04);
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
 }
 
 .copy-tooltip {
@@ -1457,7 +1465,7 @@ strong { font-weight: 700; }
 }
 
 .blog-title {
-  font-family: 'Lora', serif;
+  font-family: 'Playfair Display', Georgia, serif;
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--text);
@@ -1526,7 +1534,7 @@ strong { font-weight: 700; }
   background: none;
   border: none;
   cursor: pointer;
-  font-family: 'Assistant', sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--text-muted);
@@ -1562,7 +1570,7 @@ strong { font-weight: 700; }
 .prose h4,
 .prose h5,
 .prose h6 {
-  font-family: 'Lora', serif;
+  font-family: 'Playfair Display', Georgia, serif;
   font-weight: 600;
   line-height: 1.25;
   color: var(--text);
@@ -1628,7 +1636,7 @@ strong { font-weight: 700; }
   border-left: 3px solid var(--accent);
   padding-left: 1.1rem;
   margin: 1.75rem 0;
-  font-family: 'Lora', serif;
+  font-family: 'Playfair Display', Georgia, serif;
   font-style: italic;
   color: var(--text-muted);
 }

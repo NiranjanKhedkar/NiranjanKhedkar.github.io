@@ -32,7 +32,7 @@
       const r = p.r + Math.sin(t * 0.0011 + p.wob) * 3;
       ctx.beginPath();
       ctx.arc(CX, CY, r, p.a, p.a + p.len);
-      ctx.strokeStyle = `rgba(26,26,26,${p.alpha})`;
+      ctx.strokeStyle = `rgba(29,75,65,${p.alpha})`;
       ctx.lineWidth = 1.1;
       ctx.stroke();
     }
@@ -46,14 +46,14 @@
     projection.rotate([rotation, -18, 0]);
     drawWhirl(t);
     ctx.beginPath(); path({ type: 'Sphere' });
-    ctx.strokeStyle = 'rgba(26,26,26,0.55)'; ctx.lineWidth = 1; ctx.stroke();
+    ctx.strokeStyle = 'rgba(29,75,65,0.55)'; ctx.lineWidth = 1; ctx.stroke();
     if (land) {
       ctx.beginPath(); path(graticule);
-      ctx.strokeStyle = 'rgba(26,26,26,0.10)'; ctx.lineWidth = 0.5; ctx.stroke();
+      ctx.strokeStyle = 'rgba(29,75,65,0.10)'; ctx.lineWidth = 0.5; ctx.stroke();
       ctx.beginPath(); path(land);
-      ctx.fillStyle = 'rgba(26,26,26,0.14)'; ctx.fill();
+      ctx.fillStyle = 'rgba(29,75,65,0.14)'; ctx.fill();
       ctx.beginPath(); path(countries);
-      ctx.strokeStyle = '#1a1a1a'; ctx.lineWidth = 0.6; ctx.stroke();
+      ctx.strokeStyle = '#1d4b41'; ctx.lineWidth = 0.6; ctx.stroke();
     }
     animId = requestAnimationFrame(render);
   }
